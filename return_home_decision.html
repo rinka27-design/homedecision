@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帰宅する・しない</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #extra-options {
+            display: none;
+            margin-top: 20px;
+        }
+        .confirmation {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>帰宅する・しない</h1>
+    <div class="options">
+        <button onclick="selectOption('帰宅する')">帰宅する</button>
+        <button onclick="selectOption('帰宅しない')">帰宅しない</button>
+    </div>
+    <div id="extra-options">
+        <h2>「帰宅しない」を選択しました。理由を選んでください。</h2>
+        <button onclick="selectReason('泊まる')">泊まる</button>
+        <button onclick="selectReason('オールする')">オールする</button>
+        <button onclick="selectReason('ノーコメント')">ノーコメント</button>
+    </div>
+    <p id="result"></p>
+    <div class="confirmation">
+        <label>
+            <input type="checkbox" id="confirmation-checkbox" onclick="confirmCheck()">
+            確認した
+        </label>
+        <p id="confirmation-status"></p>
+    </div>
+
+    <script>
+        function selectOption(option) {
+            if (option === '帰宅しない') {
+                document.getElementById('extra-options').style.display = 'block';
+            } else {
+                document.getElementById('extra-options').style.display = 'none';
+                document.getElementById('result').textContent = '選択されたオプション: ' + option;
+                document.getElementById('confirmation-checkbox').checked = false;
+                document.getElementById('confirmation-status').textContent = '';
+            }
+        }
+
+        function selectReason(reason) {
+            document.getElementById('result').textContent = '選択されたオプション: 帰宅しない, 理由: ' + reason;
+            document.getElementById('confirmation-checkbox').checked = false;
+            document.getElementById('confirmation-status').textContent = '';
+        }
+
+        function confirmCheck() {
+            var checkbox = document.getElementById('confirmation-checkbox');
+            if (checkbox.checked) {
+                document.getElementById('confirmation-status').textContent = '母が確認しました。';
+            } else {
+                document.getElementById('confirmation-status').textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>
